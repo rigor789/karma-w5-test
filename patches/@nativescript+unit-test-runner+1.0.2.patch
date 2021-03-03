@@ -1,0 +1,13 @@
+diff --git a/node_modules/@nativescript/unit-test-runner/app/bundle-app.js b/node_modules/@nativescript/unit-test-runner/app/bundle-app.js
+index d268299..7b057f0 100644
+--- a/node_modules/@nativescript/unit-test-runner/app/bundle-app.js
++++ b/node_modules/@nativescript/unit-test-runner/app/bundle-app.js
+@@ -1,2 +1,8 @@
++require('@nativescript/core/bundle-entry-points')
++
+ import { Application } from "@nativescript/core";
++
++const context = require.context('./', true, /.*\.(js|css|xml)/)
++global.registerWebpackModules(context);
++
+ Application.run({ moduleName: "bundle-app-root" });

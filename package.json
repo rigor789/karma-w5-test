@@ -1,6 +1,6 @@
 {
   "name": "@nativescript/template-hello-world-ts",
-  "main": "app.js",
+  "main": "app/app.ts",
   "version": "7.0.6",
   "author": "NativeScript Team <oss@nativescript.org>",
   "description": "NativeScript Application",
@@ -19,13 +19,24 @@
     "url": "https://github.com/NativeScript/NativeScript/issues"
   },
   "homepage": "https://github.com/NativeScript/nativescript-app-templates",
+  "scripts": {
+    "postinstall": "patch-package"
+  },
   "dependencies": {
-    "@nativescript/core": "~7.1.0",
-    "@nativescript/theme": "~2.3.0"
+    "@nativescript/core": "8.0.0-alpha.0",
+    "@nativescript/theme": "~2.3.0",
+    "@nativescript/unit-test-runner": "^1.0.2"
   },
   "devDependencies": {
+    "@nativescript/ios": "7.2.0",
     "@nativescript/types": "~7.0.0",
-    "@nativescript/webpack": "~4.0.0",
+    "@nativescript/webpack": "file:../../NativeScript/packages/webpack5/nativescript-webpack-5.0.0-dev.tgz",
+    "@types/jasmine": "3.6.3",
+    "karma": "6.1.1",
+    "karma-jasmine": "4.0.1",
+    "karma-nativescript-launcher": "0.4.0",
+    "karma-webpack": "5.0.0",
+    "patch-package": "^6.4.4",
     "typescript": "~3.9.0"
   },
   "private": "true",
