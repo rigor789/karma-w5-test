@@ -1,13 +1,35 @@
 diff --git a/node_modules/@nativescript/unit-test-runner/app/bundle-app.js b/node_modules/@nativescript/unit-test-runner/app/bundle-app.js
-index d268299..7b057f0 100644
+index d268299..c3416bd 100644
 --- a/node_modules/@nativescript/unit-test-runner/app/bundle-app.js
 +++ b/node_modules/@nativescript/unit-test-runner/app/bundle-app.js
-@@ -1,2 +1,8 @@
+@@ -1,2 +1,9 @@
 +require('@nativescript/core/bundle-entry-points')
 +
  import { Application } from "@nativescript/core";
++import "./app.css"
 +
 +const context = require.context('./', true, /.*\.(js|css|xml)/)
 +global.registerWebpackModules(context);
 +
  Application.run({ moduleName: "bundle-app-root" });
+diff --git a/node_modules/@nativescript/unit-test-runner/app/services/karma-files-service.js b/node_modules/@nativescript/unit-test-runner/app/services/karma-files-service.js
+index c276f64..fe83702 100644
+--- a/node_modules/@nativescript/unit-test-runner/app/services/karma-files-service.js
++++ b/node_modules/@nativescript/unit-test-runner/app/services/karma-files-service.js
+@@ -23,6 +23,7 @@ export class KarmaFilesService {
+             return Promise.all(scriptUrls.map((url) => {
+                 const { extension, localPath, type } = this.getScriptData(url);
+                 if (localPath) {
++                    console.log('localPath', localPath)
+                     return Promise.resolve({
+                         url,
+                         type,
+@@ -36,7 +37,7 @@ export class KarmaFilesService {
+                             url,
+                             type,
+                             contents,
+-                            shouldEval: !extension || extension.toLowerCase() === "js"
++                            shouldEval: !extension || extension.toLowerCase() === "js" || extension.toLowerCase() === "ts"
+                         };
+                     });
+                 }

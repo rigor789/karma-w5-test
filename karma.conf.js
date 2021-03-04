@@ -7,11 +7,15 @@ module.exports = function (config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine'],
+    frameworks: ['jasmine', 'webpack'],
 
 
     // list of files / patterns to load in the browser
-    files: ['app/tests/**/*.ts'],
+    files: [
+      {
+        pattern: './app/tests/**/*.ts', watched: false
+      }
+    ],
 
 
     // list of files to exclude
@@ -22,6 +26,7 @@ module.exports = function (config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      './app/tests/**/*.ts': ['webpack']
     },
 
 
@@ -73,26 +78,26 @@ module.exports = function (config) {
     singleRun: false
   };
 
-  setWebpackPreprocessor(config, options);
+  // setWebpackPreprocessor(config, options);
   setWebpack(config, options);
 
   config.set(options);
 }
 
-function setWebpackPreprocessor(config, options) {
-  if (config && config.bundle) {
-    if (!options.preprocessors) {
-      options.preprocessors = {};
-    }
+// function setWebpackPreprocessor(config, options) {
+//   if (config && config.bundle) {
+//     if (!options.preprocessors) {
+//       options.preprocessors = {};
+//     }
 
-    options.files.forEach(file => {
-      if (!options.preprocessors[file]) {
-        options.preprocessors[file] = [];
-      }
-      options.preprocessors[file].push('webpack');
-    });
-  }
-}
+//     options.files.forEach(file => {
+//       if (!options.preprocessors[file]) {
+//         options.preprocessors[file] = [];
+//       }
+//       options.preprocessors[file].push('webpack');
+//     });
+//   }
+// }
 
 function setWebpack(config, options) {
   if (config && config.bundle) {
@@ -100,16 +105,16 @@ function setWebpack(config, options) {
     env[config.platform] = true;
     env.sourceMap = config.debugBrk;
     env.appPath = config.appPath;
-    env.unitTesting = true;
-    env.verbose = true;
+    env.karmaWebpack = true
+    // env.unitTesting = true;
     options.webpack = require('./webpack.config')(env);
     // delete options.webpack.entry;
     // delete options.webpack.output.libraryTarget;
-    const invalidPluginsForUnitTesting = ["GenerateBundleStarterPlugin", "GenerateNativeScriptEntryPointsPlugin"];
-    options.webpack.plugins = options.webpack.plugins.filter(p => !invalidPluginsForUnitTesting.includes(p.constructor.name));
+    // const invalidPluginsForUnitTesting = ["GenerateBundleStarterPlugin", "GenerateNativeScriptEntryPointsPlugin"];
+    // options.webpack.plugins = options.webpack.plugins.filter(p => !invalidPluginsForUnitTesting.includes(p.constructor.name));
 
-    console.log('-'.repeat(100))
-    console.log(options.webpack)
-    console.log('-'.repeat(100))
+    // console.log('-'.repeat(100))
+    // console.log(options.webpack)
+    // console.log('-'.repeat(100))
   }
 }

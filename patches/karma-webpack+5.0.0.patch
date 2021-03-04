@@ -1,0 +1,95 @@
+diff --git a/node_modules/karma-webpack/lib/karma-webpack/framework.js b/node_modules/karma-webpack/lib/karma-webpack/framework.js
+index b44e979..5945e90 100644
+--- a/node_modules/karma-webpack/lib/karma-webpack/framework.js
++++ b/node_modules/karma-webpack/lib/karma-webpack/framework.js
+@@ -4,8 +4,8 @@ const path = require('path');
+ function KW_Framework(config) {
+   // This controller is instantiated and set during the preprocessor phase.
+   const controller = config.__karmaWebpackController;
+-  const commonsPath = path.join(controller.outputPath, 'commons.js');
+-  const runtimePath = path.join(controller.outputPath, 'runtime.js');
++  // const commonsPath = path.join(controller.outputPath, 'commons.js');
++  // const runtimePath = path.join(controller.outputPath, 'runtime.js');
+ 
+   // make sure tmp folder exists
+   if (!fs.existsSync(controller.outputPath)) {
+@@ -13,22 +13,22 @@ function KW_Framework(config) {
+   }
+ 
+   // create dummy files for commons.js and runtime.js so they get included by karma
+-  fs.closeSync(fs.openSync(commonsPath, 'w'));
+-  fs.closeSync(fs.openSync(runtimePath, 'w'));
++  // fs.closeSync(fs.openSync(commonsPath, 'w'));
++  // fs.closeSync(fs.openSync(runtimePath, 'w'));
+ 
+   // register for karma
+-  config.files.unshift({
+-    pattern: commonsPath,
+-    included: true,
+-    served: true,
+-    watched: false,
+-  });
+-  config.files.unshift({
+-    pattern: runtimePath,
+-    included: true,
+-    served: true,
+-    watched: false,
+-  });
++  // config.files.unshift({
++  //   pattern: commonsPath,
++  //   included: true,
++  //   served: true,
++  //   watched: false,
++  // });
++  // config.files.unshift({
++  //   pattern: runtimePath,
++  //   included: true,
++  //   served: true,
++  //   watched: false,
++  // });
+ }
+ 
+ KW_Framework.$inject = ['config'];
+diff --git a/node_modules/karma-webpack/lib/webpack/defaults.js b/node_modules/karma-webpack/lib/webpack/defaults.js
+index b2de656..7b00952 100644
+--- a/node_modules/karma-webpack/lib/webpack/defaults.js
++++ b/node_modules/karma-webpack/lib/webpack/defaults.js
+@@ -8,6 +8,7 @@ function create() {
+       filename: '[name].js',
+       // eslint-disable-next-line prettier/prettier
+       path: path.join(os.tmpdir(), '_karma_webpack_') + Math.floor(Math.random() * 1000000),
++      // iife: true,
+     },
+     stats: {
+       modules: false,
+@@ -15,18 +16,18 @@ function create() {
+     },
+     watch: false,
+     optimization: {
+-      runtimeChunk: 'single',
+-      splitChunks: {
+-        chunks: 'all',
+-        minSize: 0,
+-        cacheGroups: {
+-          commons: {
+-            name: 'commons',
+-            chunks: 'all',
+-            minChunks: 1,
+-          },
+-        },
+-      },
++      // runtimeChunk: 'single',
++      // splitChunks: {
++      //   chunks: 'all',
++      //   minSize: 0,
++      //   cacheGroups: {
++      //     commons: {
++      //       name: 'commons',
++      //       chunks: 'all',
++      //       minChunks: 1,
++      //     },
++      //   },
++      // },
+     },
+     plugins: [],
+   };
