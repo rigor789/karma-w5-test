@@ -7,6 +7,10 @@ logic, and to set up your page’s data binding.
 import { EventData, Page } from '@nativescript/core';
 import { HelloWorldModel } from './main-view-model';
 
+export function foo() {
+	return 'Hello World!'
+}
+
 // Event handler for Page 'navigatingTo' event attached in main-page.xml
 export function navigatingTo(args: EventData) {
     /*

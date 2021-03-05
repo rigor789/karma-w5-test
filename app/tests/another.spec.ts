@@ -1,8 +1,4 @@
-// import { foo } from '../app'
-
-function foo() {
-  return 'Hello World!'
-}
+import { foo } from '../main-page'
 
 // A sample Jasmine test
 describe("B suite", function() {
